@@ -13,6 +13,19 @@ expect.use(require('../../lib/unexpectedMap'));
         expect(new Map([['foo', 'bar']]), 'to equal', new Map([['foo', 'bar']]));
     });
 
+    it('should mark missing Map keys', function () {
+        expect(function () {
+            expect(new Map([['quux', 'bar']]), 'to equal', new Map([['quux', 'bar'], ['zuuq', 'baz']]));
+        }, 'to throw exception',
+                "expected Map([ ['quux', 'bar'] ])\n" +
+                "to equal Map([ ['quux', 'bar'], ['zuuq', 'baz'] ])\n" +
+                "\n" +
+                "Map([\n" +
+                "  ['quux', 'bar']\n" +
+                "  // missing ['zuuq', 'baz']\n" +
+                "])");
+    });
+
     it.skip('should output a value diff on matching Map', function () {
         expect(function () {
             expect(new Map([['foo', 'bar']]), 'to equal', new Map([['foo', 'baz']]));
