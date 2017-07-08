@@ -52,4 +52,16 @@ expect.use(require('../../lib/unexpectedMap'));
                 "                 // +baz\n" +
                 "])");
     });
+
+    it('should output a diff for complex Map keys', function () {
+        expect(function () {
+            expect(new Map([[['a', 'b'], 'bar']]), 'to equal', new Map([[['a', 'c'], 'bar']]));
+        }, 'to throw exception',
+                "expected Map([ [[ 'a', 'b' ], 'bar'] ]) to equal Map([ [[ 'a', 'c' ], 'bar'] ])\n" +
+                "\n" +
+                "Map([\n" +
+                "  [[ 'a', 'b' ], 'bar'] // should be removed\n" +
+                "  // missing [[ 'a', 'c' ], 'bar']\n" +
+                "])");
+    });
 });
