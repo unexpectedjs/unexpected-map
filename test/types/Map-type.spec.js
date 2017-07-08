@@ -34,12 +34,12 @@ expect.use(require('../../lib/unexpectedMap'));
                 "to equal Map([ ['quux', 'bar'] ])\n" +
                 "\n" +
                 "Map([\n" +
-                "  ['quux', 'bar']\n" +
+                "  ['quux', 'bar'],\n" +
                 "  ['zuuq', 'baz'] // should be removed\n" +
                 "])");
     });
 
-    it.skip('should output a value diff on matching Map', function () {
+    it('should output a value diff on matching Map', function () {
         expect(function () {
             expect(new Map([['foo', 'bar']]), 'to equal', new Map([['foo', 'baz']]));
         }, 'to throw exception',
