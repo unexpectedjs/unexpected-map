@@ -81,8 +81,8 @@ expect.use(require('../../lib/unexpectedMap'));
             "to satisfy Map([ [[], { foo: null }], ['bar', 'baz'] ])\n" +
             "\n" +
             "Map([\n" +
-            "  [[], { foo: null }\n" +
-            "  // missing ['bar', 'baz'\n" +
+            "  [[], { foo: null }],\n" +
+            "  // missing ['bar', 'baz']\n" +
             "])"
         );
     });
@@ -94,8 +94,8 @@ expect.use(require('../../lib/unexpectedMap'));
             "expected Map([ ['foo', { foo: null }] ]) to satisfy Map([ ['bar', { foo: null }] ])\n" +
             "\n" +
             "Map([\n" +
-            "  ['foo', { foo: null }\n" +
-            "  // missing ['bar', { foo: null }\n" +
+            "  ['foo', { foo: null }],\n" +
+            "  // missing ['bar', { foo: null }]\n" +
             "])"
         );
     });
