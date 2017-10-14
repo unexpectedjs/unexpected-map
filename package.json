@@ -1,0 +1,23 @@
+{
+  "name": "unepexcted-map",
+  "version": "0.0.0",
+  "description": "Add support to Unexpected for testing Map instances",
+  "main": "lib/unexpectedMap.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Alex J Burke <alex@alexjeffburke.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/alexjeffburke/uenxpected-map.git"
+  },
+  "license": "BSD-3-Clause",
+  "peerDependencies": {
+    "unexpected": "^10.36.0"
+  },
+  "devDependencies": {
+    "jest": "20.0.4",
+    "unexpected": "git://github.com/alexjeffburke/unexpected.git#minimal-map-hooks"
+  }
+}
