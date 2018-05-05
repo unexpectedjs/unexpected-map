@@ -14,10 +14,10 @@
   },
   "license": "BSD-3-Clause",
   "peerDependencies": {
-    "unexpected": "^10.36.0"
+    "unexpected": "^10.37.7"
   },
   "devDependencies": {
     "jest": "20.0.4",
-    "unexpected": "git://github.com/alexjeffburke/unexpected.git#minimal-map-hooks"
+    "unexpected": "^10.37.7"
   }
 }
