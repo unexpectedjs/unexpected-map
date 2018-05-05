@@ -1,5 +1,5 @@
 {
-  "name": "unepexcted-map",
+  "name": "unexpected-map",
   "version": "0.0.0",
   "description": "Add support to Unexpected for testing Map instances",
   "main": "lib/unexpectedMap.js",
