@@ -91,6 +91,7 @@ describe('to satisfy assertion', function() {
     });
   });
 
+  // eslint-disable-next-line no-constant-condition
   if (false && Object.defineProperty) {
     it('should honor the getKeys implementation of a type when building a diff', function() {
       function MyThing(a, b) {
