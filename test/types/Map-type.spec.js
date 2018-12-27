@@ -4,6 +4,7 @@ const expect = require('unexpected').clone();
 
 expect.use(require('../../lib/unexpectedMap'));
 
+expect.output.preferredWidth = 80;
 
 (typeof Map !== 'function' ? describe.skip : describe)('Map type', function() {
   it('treats an empty Map as equal to Map', function() {

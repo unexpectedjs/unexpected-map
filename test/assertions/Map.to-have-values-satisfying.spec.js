@@ -4,6 +4,7 @@ var expect = require('unexpected').clone();
 
 expect.use(require('../../lib/unexpectedMap'));
 
+expect.output.preferredWidth = 80;
 
 describe('to have values satiasying assertion', function() {
   it('should have values satisfying an object', function() {

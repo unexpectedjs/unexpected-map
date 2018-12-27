@@ -3,6 +3,7 @@ var expect = require('unexpected').clone();
 
 expect.use(require('../../lib/unexpectedMap'));
 
+expect.output.preferredWidth = 80;
 
 expect.addAssertion('<any> when delayed <number> <assertion>', function(
   expect,
