@@ -11,7 +11,7 @@
   "author": "Alex J Burke <alex@alexjeffburke.com>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/alexjeffburke/uenxpected-map.git"
+    "url": "git://github.com/alexjeffburke/unexpected-map.git"
   },
   "license": "BSD-3-Clause",
   "peerDependencies": {
