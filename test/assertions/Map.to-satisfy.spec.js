@@ -5,21 +5,6 @@ expect.use(require('../../lib/unexpectedMap'));
 
 expect.output.preferredWidth = 80;
 
-expect.addAssertion('<any> when delayed <number> <assertion>', function(
-  expect,
-  subject,
-  value
-) {
-  return expect.promise(function(run) {
-    setTimeout(
-      run(function() {
-        return expect.shift();
-      }),
-      value
-    );
-  });
-});
-
 expect.addAssertion('<any> when delayed a little bit <assertion>', function(
   expect,
   subject
@@ -35,10 +20,6 @@ expect.addAssertion('<any> when delayed a little bit <assertion>', function(
 });
 
 describe('to satisfy assertion', function() {
-  function toArguments() {
-    return arguments;
-  }
-
   it('passes when an object is tested against itself, even in the presence of circular references', function() {
     var circular = {};
     circular.loop = circular;
@@ -128,21 +109,6 @@ describe('to satisfy assertion', function() {
     });
   }
 
-  it.skip('renders missing properties correctly', function() {
-    expect(
-      function() {
-        expect({ foo: 'bar' }, 'to satisfy', { foo: 'bar', baz: 123 });
-      },
-      'to throw',
-      "expected { foo: 'bar' } to satisfy { foo: 'bar', baz: 123 }\n" +
-        '\n' +
-        '{\n' +
-        "  foo: 'bar'\n" +
-        '  // missing baz: 123\n' +
-        '}'
-    );
-  });
-
   it('should render a diff where missing properties expected to be missing are not rendered', function() {
     // Regression test, used to be shown as:  shown as // missing: <property name>: undefined
     expect(
@@ -159,25 +125,6 @@ describe('to satisfy assertion', function() {
         'Map([\n' +
         "  ['bar', 123] // should equal 456\n" +
         '])'
-    );
-  });
-
-  it.skip('ignores blacklisted properties in the diff', function() {
-    var error = new Error('foo');
-    error.description = 'qux';
-    expect(
-      function() {
-        expect(error, 'to satisfy', new Error('bar'));
-      },
-      'to throw',
-      "expected Error('foo') to satisfy Error('bar')\n" +
-        '\n' +
-        'Error({\n' +
-        "  message: 'foo' // should equal 'bar'\n" +
-        '                 //\n' +
-        '                 // -foo\n' +
-        '                 // +bar\n' +
-        '})'
     );
   });
 
@@ -199,57 +146,6 @@ describe('to satisfy assertion', function() {
         // XXX
         "  // missing: ['baz', should equal 123]\n" +
         '])'
-    );
-  });
-
-  it.skip('forwards normal errors to the top-level', function() {
-    expect(
-      function() {
-        expect(
-          {
-            foo: 'foo'
-          },
-          'to satisfy',
-          function(value) {
-            throw new Error('Custom error');
-          }
-        );
-      },
-      'to throw',
-      'Custom error'
-    );
-  });
-
-  it.skip('forwards normal errors found in promise aggregate errors to the top level', function() {
-    var clonedExpect = expect
-      .clone()
-      .addAssertion('to foo', function(expect, subject) {
-        var promises = [
-          clonedExpect.promise(function() {
-            clonedExpect('foo', 'to equal', 'bar');
-          }),
-          clonedExpect.promise(function() {
-            return clonedExpect.promise.any([
-              clonedExpect.promise(function() {
-                clonedExpect('foo', 'to equal', 'bar');
-              }),
-              clonedExpect.promise(function() {
-                throw new Error('wat');
-              })
-            ]);
-          })
-        ];
-        return expect.promise.all(promises).caught(function(err) {
-          return clonedExpect.promise.settle(promises);
-        });
-      });
-
-    expect(
-      function() {
-        return clonedExpect('foo', 'to foo');
-      },
-      'to throw',
-      'wat'
     );
   });
 
@@ -394,49 +290,6 @@ describe('to satisfy assertion', function() {
     });
   });
 
-  describe.skip('on object with getters', function() {
-    it('should satisfy on the value returned by the getter', function() {
-      var subject = { nextLevel: {} };
-      Object.defineProperty(subject.nextLevel, 'getMe', {
-        get: function() {
-          return 'got me';
-        },
-        enumerable: false
-      });
-
-      expect(subject, 'to satisfy', {
-        nextLevel: {
-          getMe: 'got me'
-        }
-      });
-    });
-  });
-
-  describe.skip('on array-like', function() {
-    it('should diff correctly against an array on the right hand side', function() {
-      expect(
-        function() {
-          expect(toArguments({ foo: 'foo' }, 2, 3), 'to satisfy', [
-            { foo: 'f00' }
-          ]);
-        },
-        'to throw',
-        "expected arguments( { foo: 'foo' }, 2, 3 ) to satisfy [ { foo: 'f00' } ]\n" +
-          '\n' +
-          'arguments(\n' +
-          '  {\n' +
-          "    foo: 'foo' // should equal 'f00'\n" +
-          '               //\n' +
-          '               // -foo\n' +
-          '               // +f00\n' +
-          '  },\n' +
-          '  2, // should be removed\n' +
-          '  3 // should be removed\n' +
-          ')'
-      );
-    });
-  });
-
   it('should support a chained expect.it', function() {
     expect(
       new Map([['foo', 123]]),
@@ -537,26 +390,6 @@ describe('to satisfy assertion', function() {
         '                   //   did you mean:\n' +
         '                   //     <boolean> [not] to be true\n' +
         '])'
-    );
-  });
-
-  it.skip('includes the constructor name in the diff', function() {
-    function Foo(value) {
-      this.value = value;
-    }
-    expect(
-      function() {
-        expect(new Foo('bar'), 'to satisfy', { value: 'quux' });
-      },
-      'to throw exception',
-      "expected Foo({ value: 'bar' }) to satisfy { value: 'quux' }\n" +
-        '\n' +
-        'Foo({\n' +
-        "  value: 'bar' // should equal 'quux'\n" +
-        '               //\n' +
-        '               // -bar\n' +
-        '               // +quux\n' +
-        '})'
     );
   });
 
@@ -717,147 +550,8 @@ describe('to satisfy assertion', function() {
     expect({ foo: 123 }, 'not to exhaustively satisfy', { bar: undefined });
   });
 
-  it.skip('fails when the assertion fails', function() {
-    expect(function() {
-      expect(123, 'to satisfy assertion', 'to be a string');
-    }, 'to throw');
-
-    expect(
-      function() {
-        expect('foobar', 'to satisfy', /quux/i);
-      },
-      'to throw',
-      "expected 'foobar' to match /quux/i"
-    );
-
-    // FIXME: Could this error message be improved?
-    expect(
-      function() {
-        expect({ foo: 123 }, 'to satisfy', {
-          foo: expect.it('to be a string')
-        });
-      },
-      'to throw',
-      "expected { foo: 123 } to satisfy { foo: expect.it('to be a string') }\n" +
-        '\n' +
-        '{\n' +
-        '  foo: 123 // should be a string\n' +
-        '}'
-    );
-
-    expect(function() {
-      expect({ foo: 123, bar: 456 }, 'to exhaustively satisfy', { foo: 123 });
-    }, 'to throw');
-
-    expect(function() {
-      expect({ foo: 123 }, 'to exhaustively satisfy', { bar: undefined });
-    }, 'to throw');
-  });
-
-  it('should not break when trying to determine whether an object and null are structurally similar', function() {
-    expect(
-      function() {
-        expect([new Map()], 'to satisfy', [null]);
-      },
-      'to throw',
-      'expected [ Map([]) ] to satisfy [ null ]\n' +
-        '\n' +
-        '[\n' +
-        '  Map([]) // should equal null\n' +
-        ']'
-    );
-  });
-
-  describe.skip('with the exhaustively flag', function() {
-    function Foo() {}
-    Foo.prototype.isFoo = true;
-    describe('matching on properties found in the prototype', function() {
-      it('should succeed', function() {
-        expect(new Foo(), 'to exhaustively satisfy', { isFoo: true });
-      });
-
-      it('should fail with a diff', function() {
-        expect(
-          function() {
-            expect(new Foo(), 'to exhaustively satisfy', { isFoo: false });
-          },
-          'to throw',
-          'expected Foo({}) to exhaustively satisfy { isFoo: false }\n' +
-            '\n' +
-            'Foo({\n' +
-            '  isFoo: true // should equal false\n' +
-            '})'
-        );
-      });
-    });
-
-    it('should consider a object with no own properties to be exhaustively satisfied by an empty object', function() {
-      expect(new Foo(), 'to exhaustively satisfy', {});
-    });
-
-    describe('with a non-enumerable property', function() {
-      var bar = {};
-      Object.defineProperty(bar, 'nonEnumerable', {
-        value: 'theValue',
-        enumerable: false
-      });
-
-      describe('when matching the non-enumerable property', function() {
-        it('should succeed', function() {
-          expect(bar, 'to exhaustively satisfy', { nonEnumerable: 'theValue' });
-        });
-
-        it('should fail with a diff', function() {
-          expect(
-            function() {
-              expect(bar, 'to exhaustively satisfy', {
-                nonEnumerable: 'wrong'
-              });
-            },
-            'to throw',
-            "expected {} to exhaustively satisfy { nonEnumerable: 'wrong' }\n" +
-              '\n' +
-              '{\n' +
-              '  nonEnumerable:\n' +
-              "    'theValue' // should equal 'wrong'\n" +
-              '               //\n' +
-              '               // -theValue\n' +
-              '               // +wrong\n' +
-              '}'
-          );
-        });
-      });
-
-      describe('when not matching the non-enumerable property', function() {
-        it('should succeed', function() {
-          expect(bar, 'to exhaustively satisfy', {});
-        });
-
-        it('should fail with a diff', function() {
-          expect(
-            function() {
-              expect(bar, 'to exhaustively satisfy', {
-                somethingElse: 'wrong'
-              });
-            },
-            'to throw',
-            "expected {} to exhaustively satisfy { somethingElse: 'wrong' }\n" +
-              '\n' +
-              '{\n' +
-              "  // missing somethingElse: 'wrong'\n" +
-              '}'
-          );
-        });
-      });
-    });
-  });
-
   // Debatable:
   describe('when an unpresent value to is satisfied against a function', function() {
-    it.skip('should allow an unpresent value to be satisfied against a non-expect.it function', function() {
-      expect({}, 'to satisfy', { foo: function() {} });
-    });
-
     it('should fail when the function throws', function() {
       expect(
         function() {
@@ -948,29 +642,6 @@ describe('to satisfy assertion', function() {
         );
       }
     );
-  });
-
-  describe.skip('when matching the constructor property of an object', function() {
-    function Foo() {}
-
-    // Fails because functions aren't modelled as objects:
-    it('should succeed', function() {
-      expect(new Foo(), 'to satisfy', { constructor: { name: 'Foo' } });
-    });
-
-    it('fail with a diff', function() {
-      expect(
-        function() {
-          expect(new Foo(), 'to satisfy', { constructor: 123 });
-        },
-        'to throw',
-        'expected Foo({}) to satisfy { constructor: 123 }\n' +
-          '\n' +
-          'Foo({\n' +
-          '  constructor: function Foo() {} // should equal 123\n' +
-          '})'
-      );
-    });
   });
 
   it('should not break when the assertion fails and the subject has a property that also exists on Object.prototype', function() {
