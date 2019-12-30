@@ -1,4 +1,4 @@
-/*Map*/
+/* globals Map */
 var expect = require('unexpected').clone();
 
 expect.use(require('../../lib/unexpectedMap'));

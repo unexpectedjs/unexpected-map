@@ -1,4 +1,4 @@
-/*Map*/
+/* globals Map */
 
 const expect = require('unexpected').clone();
 
