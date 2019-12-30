@@ -1,1 +1,4 @@
 /node_modules/
+
+# VS Code User Specific Settings
+/.vscode/settings.json
