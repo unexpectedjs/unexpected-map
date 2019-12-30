@@ -48,9 +48,13 @@ describe('to satisfy assertion', function() {
     it('should fail when a non-Unexpected error occurs', function() {
       expect(
         function() {
-          expect(new Map([['foo', 123]]), 'not to satisfy', function() {
-            throw new Error('foo');
-          });
+          expect(
+            new Map([['foo', 123]]),
+            'not to satisfy',
+            expect.it(() => {
+              throw new Error('foo');
+            })
+          );
         },
         'to throw',
         'foo'
@@ -264,9 +268,13 @@ describe('to satisfy assertion', function() {
 
   describe('with a regular function in the RHS object', function() {
     it('should throw an exception if the condition is not met', function() {
-      expect(new Map([['foo', 123]]), 'to satisfy', function(obj) {
-        expect(obj.get('foo'), 'to equal', 123);
-      });
+      expect(
+        new Map([['foo', 123]]),
+        'to satisfy',
+        expect.it(obj => {
+          expect(obj.get('foo'), 'to equal', 123);
+        })
+      );
     });
 
     it('should only consider functions that are identified as functions by the type system', function() {
@@ -558,18 +566,11 @@ describe('to satisfy assertion', function() {
           expect(
             new Map(),
             'to satisfy',
-            new Map([
-              [
-                'foo',
-                function(value) {
-                  expect(value, 'to be a string');
-                }
-              ]
-            ])
+            new Map([['foo', expect.it('to be a string')]])
           );
         },
         'to throw',
-        function(err) {
+        expect.it(function(err) {
           // Compensate for V8 5.1+ setting { foo: function () {} }.foo.name === 'foo'
           // http://v8project.blogspot.dk/2016/04/v8-release-51.html
           expect(
@@ -580,7 +581,7 @@ describe('to satisfy assertion', function() {
             'to contain',
             'Map([\n' + "  // missing: ['foo', should be a string]\n" + '])'
           );
-        }
+        })
       );
     });
   });
@@ -624,7 +625,7 @@ describe('to satisfy assertion', function() {
         );
       },
       'to throw',
-      function(err) {
+      expect.it(function(err) {
         // Compensate for V8 5.1+ setting { foo: function () {} }.foo.name === 'foo'
         // http://v8project.blogspot.dk/2016/04/v8-release-51.html
         expect(
@@ -640,7 +641,7 @@ describe('to satisfy assertion', function() {
             "  // missing ['foo', should satisfy function () {}]\n" +
             '])'
         );
-      }
+      })
     );
   });
 
