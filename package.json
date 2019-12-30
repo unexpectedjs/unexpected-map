@@ -15,7 +15,7 @@
   },
   "license": "BSD-3-Clause",
   "peerDependencies": {
-    "unexpected": "^10.37.7"
+    "unexpected": "^10.40.2"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
@@ -24,6 +24,6 @@
     "eslint-plugin-prettier": "^2.6.0",
     "mocha": "^5.2.0",
     "prettier": "1.15.3",
-    "unexpected": "^10.37.7"
+    "unexpected": "^10.40.2"
   }
 }
