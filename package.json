@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "test": "mocha --recursive"
+    "test": "mocha"
   },
   "keywords": [],
   "author": "Alex J Burke <alex@alexjeffburke.com>",
