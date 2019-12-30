@@ -1,5 +1,20 @@
 const config = {
-  extends: ['pretty-standard']
+  extends: ['standard', 'prettier', 'prettier/standard'],
+  plugins: ['import', 'mocha'],
+  rules: {
+    'import/no-unresolved': ['error', { commonjs: true }],
+    'mocha/no-exclusive-tests': 'error',
+    'mocha/no-nested-tests': 'error',
+    'mocha/no-identical-title': 'error'
+  },
+  overrides: [
+    {
+      files: ['test/**/*.js'],
+      env: {
+        mocha: true
+      }
+    }
+  ]
 };
 
 if (process.stdin.isTTY) {
