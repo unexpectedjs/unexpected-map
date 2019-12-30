@@ -120,7 +120,10 @@ describe('to satisfy assertion', function() {
         expect(
           new Map([['bar', 123]]),
           'to satisfy',
-          new Map([['foo', undefined], ['bar', 456]])
+          new Map([
+            ['foo', undefined],
+            ['bar', 456]
+          ])
         );
       },
       'to throw',
@@ -138,7 +141,10 @@ describe('to satisfy assertion', function() {
         expect(
           new Map([['foo', 'bar']]),
           'to satisfy',
-          new Map([['foo', 'bar'], ['baz', expect.it('to equal', 123)]])
+          new Map([
+            ['foo', 'bar'],
+            ['baz', expect.it('to equal', 123)]
+          ])
         );
       },
       'to throw',
@@ -358,7 +364,10 @@ describe('to satisfy assertion', function() {
 
   it('should support delegating to itself with the exhaustively flag', function() {
     expect(
-      new Map([['foo', new Map([['bar', 123]])], ['baz', 456]]),
+      new Map([
+        ['foo', new Map([['bar', 123]])],
+        ['baz', 456]
+      ]),
       'to satisfy',
       new Map([
         ['foo', expect.it('to exhaustively satisfy', new Map([['bar', 123]]))]
@@ -368,7 +377,16 @@ describe('to satisfy assertion', function() {
 
   it('should support delegating to itself without the exhaustively flag', function() {
     expect(
-      new Map([['foo', new Map([['bar', 123], ['baz', 456]])], ['baz', 456]]),
+      new Map([
+        [
+          'foo',
+          new Map([
+            ['bar', 123],
+            ['baz', 456]
+          ])
+        ],
+        ['baz', 456]
+      ]),
       'to satisfy',
       new Map([['foo', expect.it('to satisfy', new Map([['bar', 123]]))]])
     );
@@ -621,7 +639,10 @@ describe('to satisfy assertion', function() {
         expect(
           new Map([]),
           'to satisfy',
-          new Map([['bar', 123], ['foo', function() {}]])
+          new Map([
+            ['bar', 123],
+            ['foo', function() {}]
+          ])
         );
       },
       'to throw',

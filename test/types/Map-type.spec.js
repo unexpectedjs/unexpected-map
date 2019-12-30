@@ -21,7 +21,10 @@ expect.output.preferredWidth = 80;
         expect(
           new Map([['quux', 'bar']]),
           'to equal',
-          new Map([['quux', 'bar'], ['zuuq', 'baz']])
+          new Map([
+            ['quux', 'bar'],
+            ['zuuq', 'baz']
+          ])
         );
       },
       'to throw exception',
@@ -39,7 +42,10 @@ expect.output.preferredWidth = 80;
     expect(
       function() {
         expect(
-          new Map([['quux', 'bar'], ['zuuq', 'baz']]),
+          new Map([
+            ['quux', 'bar'],
+            ['zuuq', 'baz']
+          ]),
           'to equal',
           new Map([['quux', 'bar']])
         );
@@ -113,7 +119,10 @@ expect.output.preferredWidth = 80;
         expect(
           new Map([[[], { foo: null }]]),
           'to satisfy',
-          new Map([[[], { foo: null }], ['bar', 'baz']])
+          new Map([
+            [[], { foo: null }],
+            ['bar', 'baz']
+          ])
         );
       },
       'to throw exception',
