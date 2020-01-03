@@ -154,4 +154,18 @@ expect.output.preferredWidth = 80;
         '])'
     );
   });
+
+  describe('when interoperating with other types', () => {
+    it('should error with a type mismatch (to equal)', () => {
+      expect(
+        () => {
+          expect(new Map(), 'to equal', {});
+        },
+        'to throw',
+        'expected Map([]) to equal {}\n' +
+          '\n' +
+          'Mismatching constructors Map should be Object'
+      );
+    });
+  });
 });
