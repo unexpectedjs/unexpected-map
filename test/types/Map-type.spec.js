@@ -167,5 +167,17 @@ expect.output.preferredWidth = 80;
           'Mismatching constructors Map should be Object'
       );
     });
+
+    it('should error with a type mismatch (to satisfy)', () => {
+      expect(
+        () => {
+          expect(new Map(), 'to satisfy', {});
+        },
+        'to throw',
+        'expected Map([]) to equal {}\n' +
+          '\n' +
+          'Mismatching constructors Map should be Object'
+      );
+    });
   });
 });
