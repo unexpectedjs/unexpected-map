@@ -1,9 +1,22 @@
 /* globals Map */
-var expect = require('unexpected').clone();
+var expect = require('unexpected')
+  .clone()
+  .use(require('unexpected-snapshot'));
 
 expect.use(require('../../lib/unexpectedMap'));
 
 expect.output.preferredWidth = 80;
+
+expect.addAssertion(
+  '<function> to throw an error satisfying <assertion>',
+  (expect, cb) =>
+    expect(cb, 'to throw').then(err => {
+      expect.errorMode = 'nested';
+      return expect.shift(
+        err.isUnexpected ? err.getErrorMessage('text').toString() : err.message
+      );
+    })
+);
 
 expect.addAssertion('<any> when delayed a little bit <assertion>', function(
   expect,
@@ -70,7 +83,8 @@ describe('to satisfy assertion', function() {
             new Map([['foo', 123]])
           );
         },
-        'to throw',
+        'to throw an error satisfying',
+        'to equal snapshot',
         "expected Map([ ['foo', 123] ]) not to satisfy Map([ ['foo', 123] ])"
       );
     });
@@ -126,12 +140,15 @@ describe('to satisfy assertion', function() {
           ])
         );
       },
-      'to throw',
-      "expected Map([ ['bar', 123] ]) to satisfy Map([ ['foo', undefined], ['bar', 456] ])\n" +
-        '\n' +
-        'Map([\n' +
-        "  ['bar', 123] // should equal 456\n" +
-        '])'
+      'to throw an error satisfying',
+      'to equal snapshot',
+      expect.unindent`
+        expected Map([ ['bar', 123] ]) to satisfy Map([ ['foo', undefined], ['bar', 456] ])
+
+        Map([
+          ['bar', 123] // should equal 456
+        ])
+      `
     );
   });
 
@@ -147,15 +164,17 @@ describe('to satisfy assertion', function() {
           ])
         );
       },
-      'to throw',
-      "expected Map([ ['foo', 'bar'] ])\n" +
-        "to satisfy Map([ ['foo', 'bar'], ['baz', expect.it('to equal', 123)] ])\n" +
-        '\n' +
-        'Map([\n' +
-        "  ['foo', 'bar'],\n" +
-        // XXX
-        "  // missing: ['baz', should equal 123]\n" +
-        '])'
+      'to throw an error satisfying',
+      'to equal snapshot',
+      expect.unindent`
+        expected Map([ ['foo', 'bar'] ])
+        to satisfy Map([ ['foo', 'bar'], ['baz', expect.it('to equal', 123)] ])
+
+        Map([
+          ['foo', 'bar'],
+          // missing: ['baz', should equal 123]
+        ])
+      `
     );
   });
 
@@ -234,13 +253,15 @@ describe('to satisfy assertion', function() {
           new Map([['foo', /f00/]])
         );
       },
-      'to throw',
-      "expected Map([ ['foo', 'foo'] ]) to satisfy Map([ ['foo', /f00/] ])\n" +
-        '\n' +
-        'Map([\n' +
-        // XXX
-        "  ['foo', 'foo'] // should match /f00/\n" +
-        '])'
+      'to throw an error satisfying',
+      'to equal snapshot',
+      expect.unindent`
+        expected Map([ ['foo', 'foo'] ]) to satisfy Map([ ['foo', /f00/] ])
+
+        Map([
+          ['foo', 'foo'] // should match /f00/
+        ])
+      `
     );
 
     expect(
@@ -251,16 +272,19 @@ describe('to satisfy assertion', function() {
           new Map([['foo', expect.it('not to match', /oo/)]])
         );
       },
-      'to throw',
-      "expected Map([ ['foo', 'foo'] ])\n" +
-        "to satisfy Map([ ['foo', expect.it('not to match', /oo/)] ])\n" +
-        '\n' +
-        'Map([\n' +
-        "  ['foo', 'foo'] // should not match /oo/\n" +
-        '                 //\n' +
-        '                 // foo\n' +
-        '                 //  ^^\n' +
-        '])'
+      'to throw an error satisfying',
+      'to equal snapshot',
+      expect.unindent`
+        expected Map([ ['foo', 'foo'] ])
+        to satisfy Map([ ['foo', expect.it('not to match', /oo/)] ])
+
+        Map([
+          ['foo', 'foo'] // should not match /oo/
+                         //
+                         // foo
+                         //  ^^
+        ])
+      `
     );
   });
 
@@ -323,18 +347,20 @@ describe('to satisfy assertion', function() {
           ])
         );
       },
-      'to throw',
-      "expected Map([ ['foo', 123] ]) to satisfy\n" +
-        'Map([\n' +
-        "  ['foo', expect.it('to be a number')\n" +
-        // XXX
-        "                  .and('to be greater than', 200)]\n" +
-        '])\n' +
-        '\n' +
-        'Map([\n' +
-        "  ['foo', 123] // ✓ should be a number and\n" +
-        '               // ⨯ should be greater than 200\n' +
-        '])'
+      'to throw an error satisfying',
+      'to equal snapshot',
+      expect.unindent`
+        expected Map([ ['foo', 123] ]) to satisfy
+        Map([
+          ['foo', expect.it('to be a number')
+                          .and('to be greater than', 200)]
+        ])
+
+        Map([
+          ['foo', 123] // ✓ should be a number and
+                       // ⨯ should be greater than 200
+        ])
+      `
     );
   });
 
@@ -405,17 +431,20 @@ describe('to satisfy assertion', function() {
           new Map([['bool', expect.it('to be true')]])
         );
       },
-      'to throw exception',
-      "expected Map([ ['bool', 'true'] ])\n" +
-        "to satisfy Map([ ['bool', expect.it('to be true')] ])\n" +
-        '\n' +
-        'Map([\n' +
-        "  ['bool', 'true'] // expected 'true' to be true\n" +
-        '                   //   The assertion does not have a matching signature for:\n' +
-        '                   //     <string> to be true\n' +
-        '                   //   did you mean:\n' +
-        '                   //     <boolean> [not] to be true\n' +
-        '])'
+      'to throw an error satisfying',
+      'to equal snapshot',
+      expect.unindent`
+        expected Map([ ['bool', 'true'] ])
+        to satisfy Map([ ['bool', expect.it('to be true')] ])
+
+        Map([
+          ['bool', 'true'] // expected 'true' to be true
+                           //   The assertion does not have a matching signature for:
+                           //     <string> to be true
+                           //   did you mean:
+                           //     <boolean> [not] to be true
+        ])
+      `
     );
   });
 
@@ -587,19 +616,15 @@ describe('to satisfy assertion', function() {
             new Map([['foo', expect.it('to be a string')]])
           );
         },
-        'to throw',
-        expect.it(function(err) {
-          // Compensate for V8 5.1+ setting { foo: function () {} }.foo.name === 'foo'
-          // http://v8project.blogspot.dk/2016/04/v8-release-51.html
-          expect(
-            err
-              .getErrorMessage('text')
-              .toString()
-              .replace('function foo', 'function '),
-            'to contain',
-            'Map([\n' + "  // missing: ['foo', should be a string]\n" + '])'
-          );
-        })
+        'to throw an error satisfying',
+        'to equal snapshot',
+        expect.unindent`
+          expected Map([]) to satisfy Map([ ['foo', expect.it('to be a string')] ])
+
+          Map([
+            // missing: ['foo', should be a string]
+          ])
+        `
       );
     });
   });
@@ -622,13 +647,15 @@ describe('to satisfy assertion', function() {
             new Map([['foo', expect.it('to be a string')]])
           );
         },
-        'to throw',
-        "expected Map([]) to satisfy Map([ ['foo', expect.it('to be a string')] ])\n" +
-          '\n' +
-          'Map([\n' +
-          // XXX
-          "  // missing: ['foo', should be a string]\n" +
-          '])'
+        'to throw an error satisfying',
+        'to equal snapshot',
+        expect.unindent`
+          expected Map([]) to satisfy Map([ ['foo', expect.it('to be a string')] ])
+
+          Map([
+            // missing: ['foo', should be a string]
+          ])
+        `
       );
     });
   });
@@ -654,13 +681,15 @@ describe('to satisfy assertion', function() {
             .getErrorMessage('text')
             .toString()
             .replace(/function foo/g, 'function '),
-          'to satisfy',
-          "expected Map([]) to satisfy Map([ ['bar', 123], ['foo', function () {}] ])\n" +
-            '\n' +
-            'Map([\n' +
-            "  // missing ['bar', 123],\n" +
-            "  // missing ['foo', should satisfy function () {}]\n" +
-            '])'
+          'to equal snapshot',
+          expect.unindent`
+            expected Map([]) to satisfy Map([ ['bar', 123], ['foo', function () {}] ])
+
+            Map([
+              // missing ['bar', 123],
+              // missing ['foo', should satisfy function () {}]
+            ])
+          `
         );
       })
     );
@@ -675,13 +704,16 @@ describe('to satisfy assertion', function() {
           new Map([['foo', 456]])
         );
       },
-      'to throw',
-      "expected Map([ ['constructor', 123] ]) to satisfy Map([ ['foo', 456] ])\n" +
-        '\n' +
-        'Map([\n' +
-        "  ['constructor', 123],\n" +
-        "  // missing ['foo', 456]\n" +
-        '])'
+      'to throw an error satisfying',
+      'to equal snapshot',
+      expect.unindent`
+        expected Map([ ['constructor', 123] ]) to satisfy Map([ ['foo', 456] ])
+
+        Map([
+          ['constructor', 123],
+          // missing ['foo', 456]
+        ])
+      `
     );
   });
 });
