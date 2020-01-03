@@ -605,8 +605,7 @@ describe('to satisfy assertion', function() {
     expect({ foo: 123 }, 'not to exhaustively satisfy', { bar: undefined });
   });
 
-  // Debatable:
-  describe('when an unpresent value to is satisfied against a function', function() {
+  describe('when an unpresent value to is satisfied against an expect.it function wrapper', function() {
     it('should fail when the function throws', function() {
       expect(
         function() {
@@ -660,7 +659,7 @@ describe('to satisfy assertion', function() {
     });
   });
 
-  it('should not break when the assertion fails and there is a fulfilled function in the RHS', function() {
+  it('should not break when the assertion fails and there is a fulfilled, expect.it-wrapped function in the RHS', function() {
     expect(
       function() {
         expect(
@@ -668,7 +667,12 @@ describe('to satisfy assertion', function() {
           'to satisfy',
           new Map([
             ['bar', 123],
-            ['foo', function() {}]
+            [
+              'foo',
+              expect.it(function(v) {
+                expect(v, 'to be undefined');
+              })
+            ]
           ])
         );
       },
@@ -683,15 +687,44 @@ describe('to satisfy assertion', function() {
             .replace(/function foo/g, 'function '),
           'to equal snapshot',
           expect.unindent`
-            expected Map([]) to satisfy Map([ ['bar', 123], ['foo', function () {}] ])
+            expected Map([]) to satisfy
+            Map([
+              ['bar', 123],
+              ['foo', expect.it(function (v) { expect(v, 'to be undefined'); })]
+            ])
 
             Map([
               // missing ['bar', 123],
-              // missing ['foo', should satisfy function () {}]
+              // missing ['foo', should satisfy expect.it(function (v) { expect(v, 'to be undefined'); })]
             ])
           `
         );
       })
+    );
+  });
+
+  it('should render a diff when the function differs', () => {
+    function myFunction() {}
+    function myOtherFunction() {}
+
+    expect(
+      () => {
+        expect(
+          new Map([['foo', myFunction]]),
+          'to satisfy',
+          new Map([['foo', myOtherFunction]])
+        );
+      },
+      'to throw an error satisfying',
+      'to equal snapshot',
+      expect.unindent`
+        expected Map([ ['foo', function myFunction() {}] ])
+        to satisfy Map([ ['foo', function myOtherFunction() {}] ])
+
+        Map([
+          ['foo', function myFunction() {}] // should be function myOtherFunction() {}
+        ])
+      `
     );
   });
 
