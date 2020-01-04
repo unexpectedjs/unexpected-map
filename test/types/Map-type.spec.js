@@ -75,10 +75,12 @@
         expected Map([ ['foo', 'bar'] ]) to equal Map([ ['foo', 'baz'] ])
 
         Map([
-          ['foo', 'bar'] // should equal 'baz'
-                         //
-                         // -bar
-                         // +baz
+          ['foo', 
+            'bar' // should equal 'baz'
+                  //
+                  // -bar
+                  // +baz
+          ]
         ])
       `
     );

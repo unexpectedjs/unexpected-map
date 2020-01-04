@@ -334,7 +334,7 @@ describe('to satisfy assertion', function() {
         expected Map([ ['foo', 123] ]) to satisfy
         Map([
           ['foo', expect.it('to be a number')
-                          .and('to be greater than', 200)]
+                  .and('to be greater than', 200)]
         ])
 
         Map([

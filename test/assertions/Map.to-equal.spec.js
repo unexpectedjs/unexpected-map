@@ -6,7 +6,7 @@ describe('to equal assertion', function() {
     }, 'not to throw');
   });
 
-  it('should show two maps not being equal', () => {
+  it('should show two maps not being equal (subject)', () => {
     expect(
       function() {
         expect(new Map([[{}, 123]]), 'to equal', new Map([[{}, 123]]));
@@ -19,6 +19,25 @@ describe('to equal assertion', function() {
         Map([
           [{}, 123] // should be removed
           // missing [{}, 123]
+        ])
+      `
+    );
+  });
+
+  it('should show two maps not being equal (value)', () => {
+    expect(
+      function() {
+        expect(new Map([[123, {}]]), 'to equal', new Map([[123, {}]]));
+      },
+      'to throw an error satisfying',
+      'to equal snapshot',
+      expect.unindent`
+        expected Map([ [123, {}] ]) to equal Map([ [123, {}] ])
+
+        Map([
+          [123, {
+
+          }]
         ])
       `
     );
