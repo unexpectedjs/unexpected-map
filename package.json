@@ -11,7 +11,12 @@
     "lint": "eslint .",
     "test": "mocha"
   },
-  "keywords": [],
+  "keywords": [
+    "test",
+    "assertion",
+    "Unexpected",
+    "Map"
+  ],
   "author": "Alex J Burke <alex@alexjeffburke.com>",
   "repository": {
     "type": "git",
