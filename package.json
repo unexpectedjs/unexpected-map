@@ -7,6 +7,7 @@
     "lib"
   ],
   "scripts": {
+    "coverage": "nyc --reporter lcov --reporter text mocha",
     "lint": "eslint .",
     "test": "mocha"
   },
@@ -30,6 +31,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "mocha": "^6.2.2",
+    "nyc": "^15.0.0",
     "prettier": "~1.19.1",
     "unexpected": "^11.0.0",
     "unexpected-snapshot": "^0.7.1"
