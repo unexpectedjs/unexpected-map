@@ -1,5 +1,7 @@
 # unexpected-map
 
-[![NPM version](https://badge.fury.io/js/unexpected-map.svg)](https://badge.fury.io/js/unexpected-map)
+An [Unexpected](http://unexpected.js.org) plugin that adds support for testing Map instances.
 
-An Unexpected plugin that provides support to assertions against Map instances.
+[![NPM version](https://img.shields.io/npm/v/unexpected-map.svg)](https://www.npmjs.com/package/unexpected-map)
+[![Build Status](https://img.shields.io/travis/unexpectedjs/unexpected-map/master.svg)](https://travis-ci.org/unexpectedjs/unexpected-map)
+[![Coverage Status](https://img.shields.io/coveralls/unexpectedjs/unexpected-map/master.svg)](https://coveralls.io/r/unexpectedjs/unexpected-map?branch=master)
