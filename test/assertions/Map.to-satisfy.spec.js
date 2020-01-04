@@ -596,6 +596,47 @@ describe('to satisfy assertion', function() {
     expect({ foo: 123 }, 'not to exhaustively satisfy', { bar: undefined });
   });
 
+  describe('with the exhaustively flag', () => {
+    describe('when matching entries in the Map', () => {
+      it('should consider an empty Map exhaustively satisfied by another empty Map', () => {
+        expect(new Map(), 'to exhaustively satisfy', new Map());
+      });
+
+      it('should succeed', () => {
+        expect(
+          new Map([['foo', true]]),
+          'to exhaustively satisfy',
+          new Map([['foo', true]])
+        );
+      });
+
+      it('should fail with a diff', () => {
+        expect(
+          () => {
+            expect(
+              new Map([
+                ['foo', true],
+                ['bar', false]
+              ]),
+              'to exhaustively satisfy',
+              new Map()
+            );
+          },
+          'to throw an error satisfying',
+          'to equal snapshot',
+          expect.unindent`
+            expected Map([ ['foo', true], ['bar', false] ]) to exhaustively satisfy Map([])
+
+            Map([
+              ['foo', true, // should be removed]
+              ['bar', false // should be removed]
+            ])
+          `
+        );
+      });
+    });
+  });
+
   describe('when an unpresent value to is satisfied against an expect.it function wrapper', function() {
     it('should fail when the function throws', function() {
       expect(
