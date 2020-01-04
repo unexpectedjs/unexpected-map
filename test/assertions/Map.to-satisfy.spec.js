@@ -628,8 +628,8 @@ describe('to satisfy assertion', function() {
             expected Map([ ['foo', true], ['bar', false] ]) to exhaustively satisfy Map([])
 
             Map([
-              ['foo', true, // should be removed]
-              ['bar', false // should be removed]
+              // should be removed: ['foo', true]
+              // should be removed: ['bar', false]
             ])
           `
         );
