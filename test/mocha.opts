@@ -1,1 +1,3 @@
 --recursive
+--require ./test/common/node
+--exclude ./test/common

@@ -1,11 +1,4 @@
-/* globals Map */
-
-const expect = require('unexpected').clone();
-
-expect.use(require('../../lib/unexpectedMap'));
-
-expect.output.preferredWidth = 80;
-
+/* global expect */
 (typeof Map !== 'function' ? describe.skip : describe)('Map type', function() {
   it('treats an empty Map as equal to Map', function() {
     expect(new Map(), 'to equal', new Map());

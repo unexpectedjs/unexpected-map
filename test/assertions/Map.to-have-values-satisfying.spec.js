@@ -1,11 +1,4 @@
-/* globals Map */
-
-var expect = require('unexpected').clone();
-
-expect.use(require('../../lib/unexpectedMap'));
-
-expect.output.preferredWidth = 80;
-
+/* global expect */
 describe('to have values satiasying assertion', function() {
   it('should have values satisfying an object', function() {
     expect(function() {
