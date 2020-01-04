@@ -20,14 +20,17 @@
           ])
         );
       },
-      'to throw exception',
-      "expected Map([ ['quux', 'bar'] ])\n" +
-        "to equal Map([ ['quux', 'bar'], ['zuuq', 'baz'] ])\n" +
-        '\n' +
-        'Map([\n' +
-        "  ['quux', 'bar']\n" +
-        "  // missing ['zuuq', 'baz']\n" +
-        '])'
+      'to throw an error satisfying',
+      'to equal snapshot',
+      expect.unindent`
+        expected Map([ ['quux', 'bar'] ])
+        to equal Map([ ['quux', 'bar'], ['zuuq', 'baz'] ])
+
+        Map([
+          ['quux', 'bar']
+          // missing ['zuuq', 'baz']
+        ])
+      `
     );
   });
 
@@ -43,14 +46,17 @@
           new Map([['quux', 'bar']])
         );
       },
-      'to throw exception',
-      "expected Map([ ['quux', 'bar'], ['zuuq', 'baz'] ])\n" +
-        "to equal Map([ ['quux', 'bar'] ])\n" +
-        '\n' +
-        'Map([\n' +
-        "  ['quux', 'bar'],\n" +
-        "  ['zuuq', 'baz'] // should be removed\n" +
-        '])'
+      'to throw an error satisfying',
+      'to equal snapshot',
+      expect.unindent`
+        expected Map([ ['quux', 'bar'], ['zuuq', 'baz'] ])
+        to equal Map([ ['quux', 'bar'] ])
+
+        Map([
+          ['quux', 'bar'],
+          ['zuuq', 'baz'] // should be removed
+        ])
+      `
     );
   });
 
@@ -63,15 +69,18 @@
           new Map([['foo', 'baz']])
         );
       },
-      'to throw exception',
-      "expected Map([ ['foo', 'bar'] ]) to equal Map([ ['foo', 'baz'] ])\n" +
-        '\n' +
-        'Map([\n' +
-        "  ['foo', 'bar'] // should equal 'baz'\n" +
-        '                 //\n' +
-        '                 // -bar\n' +
-        '                 // +baz\n' +
-        '])'
+      'to throw an error satisfying',
+      'to equal snapshot',
+      expect.unindent`
+        expected Map([ ['foo', 'bar'] ]) to equal Map([ ['foo', 'baz'] ])
+
+        Map([
+          ['foo', 'bar'] // should equal 'baz'
+                         //
+                         // -bar
+                         // +baz
+        ])
+      `
     );
   });
 
@@ -84,13 +93,16 @@
           new Map([[['a', 'c'], 'bar']])
         );
       },
-      'to throw exception',
-      "expected Map([ [[ 'a', 'b' ], 'bar'] ]) to equal Map([ [[ 'a', 'c' ], 'bar'] ])\n" +
-        '\n' +
-        'Map([\n' +
-        "  [[ 'a', 'b' ], 'bar'] // should be removed\n" +
-        "  // missing [[ 'a', 'c' ], 'bar']\n" +
-        '])'
+      'to throw an error satisfying',
+      'to equal snapshot',
+      expect.unindent`
+        expected Map([ [[ 'a', 'b' ], 'bar'] ]) to equal Map([ [[ 'a', 'c' ], 'bar'] ])
+
+        Map([
+          [[ 'a', 'b' ], 'bar'] // should be removed
+          // missing [[ 'a', 'c' ], 'bar']
+        ])
+      `
     );
   });
 
@@ -120,14 +132,17 @@
           ])
         );
       },
-      'to throw exception',
-      'expected Map([ [[], { foo: null }] ])\n' +
-        "to satisfy Map([ [[], { foo: null }], ['bar', 'baz'] ])\n" +
-        '\n' +
-        'Map([\n' +
-        '  [[], { foo: null }],\n' +
-        "  // missing ['bar', 'baz']\n" +
-        '])'
+      'to throw an error satisfying',
+      'to equal snapshot',
+      expect.unindent`
+        expected Map([ [[], { foo: null }] ])
+        to satisfy Map([ [[], { foo: null }], ['bar', 'baz'] ])
+
+        Map([
+          [[], { foo: null }],
+          // missing ['bar', 'baz']
+        ])
+      `
     );
   });
 
@@ -140,13 +155,16 @@
           new Map([['bar', { foo: null }]])
         );
       },
-      'to throw exception',
-      "expected Map([ ['foo', { foo: null }] ]) to satisfy Map([ ['bar', { foo: null }] ])\n" +
-        '\n' +
-        'Map([\n' +
-        "  ['foo', { foo: null }],\n" +
-        "  // missing ['bar', { foo: null }]\n" +
-        '])'
+      'to throw an error satisfying',
+      'to equal snapshot',
+      expect.unindent`
+        expected Map([ ['foo', { foo: null }] ]) to satisfy Map([ ['bar', { foo: null }] ])
+
+        Map([
+          ['foo', { foo: null }],
+          // missing ['bar', { foo: null }]
+        ])
+      `
     );
   });
 
@@ -156,10 +174,13 @@
         () => {
           expect(new Map(), 'to equal', {});
         },
-        'to throw',
-        'expected Map([]) to equal {}\n' +
-          '\n' +
-          'Mismatching constructors Map should be Object'
+        'to throw an error satisfying',
+        'to equal snapshot',
+        expect.unindent`
+          expected Map([]) to equal {}
+
+          Mismatching constructors Map should be Object
+        `
       );
     });
 
@@ -168,10 +189,13 @@
         () => {
           expect(new Map(), 'to satisfy', {});
         },
-        'to throw',
-        'expected Map([]) to equal {}\n' +
-          '\n' +
-          'Mismatching constructors Map should be Object'
+        'to throw an error satisfying',
+        'to equal snapshot',
+        expect.unindent`
+          expected Map([]) to equal {}
+
+          Mismatching constructors Map should be Object
+        `
       );
     });
   });
