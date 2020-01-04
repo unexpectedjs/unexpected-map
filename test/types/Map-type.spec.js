@@ -141,7 +141,7 @@
         to satisfy Map([ [[], { foo: null }], ['bar', 'baz'] ])
 
         Map([
-          [[], { foo: null }],
+          [[], { foo: null }]
           // missing ['bar', 'baz']
         ])
       `
@@ -163,7 +163,7 @@
         expected Map([ ['foo', { foo: null }] ]) to satisfy Map([ ['bar', { foo: null }] ])
 
         Map([
-          ['foo', { foo: null }],
+          ['foo', { foo: null }]
           // missing ['bar', { foo: null }]
         ])
       `

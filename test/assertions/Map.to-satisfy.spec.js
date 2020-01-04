@@ -127,7 +127,9 @@ describe('to satisfy assertion', function() {
         expected Map([ ['bar', 123] ]) to satisfy Map([ ['foo', undefined], ['bar', 456] ])
 
         Map([
-          ['bar', 123] // should equal 456
+          ['bar',
+            123 // should equal 456
+          ]
         ])
       `
     );
@@ -152,7 +154,7 @@ describe('to satisfy assertion', function() {
         to satisfy Map([ ['foo', 'bar'], ['baz', expect.it('to equal', 123)] ])
 
         Map([
-          ['foo', 'bar'],
+          ['foo', 'bar']
           // missing: ['baz', should equal 123]
         ])
       `
@@ -240,7 +242,9 @@ describe('to satisfy assertion', function() {
         expected Map([ ['foo', 'foo'] ]) to satisfy Map([ ['foo', /f00/] ])
 
         Map([
-          ['foo', 'foo'] // should match /f00/
+          ['foo',
+            'foo' // should match /f00/
+          ]
         ])
       `
     );
@@ -260,10 +264,12 @@ describe('to satisfy assertion', function() {
         to satisfy Map([ ['foo', expect.it('not to match', /oo/)] ])
 
         Map([
-          ['foo', 'foo'] // should not match /oo/
-                         //
-                         // foo
-                         //  ^^
+          ['foo',
+            'foo' // should not match /oo/
+                  //
+                  // foo
+                  //  ^^
+          ]
         ])
       `
     );
@@ -338,8 +344,10 @@ describe('to satisfy assertion', function() {
         ])
 
         Map([
-          ['foo', 123] // ✓ should be a number and
-                       // ⨯ should be greater than 200
+          ['foo',
+            123 // ✓ should be a number and
+                // ⨯ should be greater than 200
+          ]
         ])
       `
     );
@@ -419,11 +427,13 @@ describe('to satisfy assertion', function() {
         to satisfy Map([ ['bool', expect.it('to be true')] ])
 
         Map([
-          ['bool', 'true'] // expected 'true' to be true
-                           //   The assertion does not have a matching signature for:
-                           //     <string> to be true
-                           //   did you mean:
-                           //     <boolean> [not] to be true
+          ['bool',
+            'true' // expected 'true' to be true
+                   //   The assertion does not have a matching signature for:
+                   //     <string> to be true
+                   //   did you mean:
+                   //     <boolean> [not] to be true
+          ]
         ])
       `
     );
@@ -675,7 +685,7 @@ describe('to satisfy assertion', function() {
             ])
 
             Map([
-              // missing ['bar', 123],
+              // missing ['bar', 123]
               // missing ['foo', should satisfy expect.it(function (v) { expect(v, 'to be undefined'); })]
             ])
           `
@@ -703,7 +713,9 @@ describe('to satisfy assertion', function() {
         to satisfy Map([ ['foo', function myOtherFunction() {}] ])
 
         Map([
-          ['foo', function myFunction() {}] // should be function myOtherFunction() {}
+          ['foo',
+            function myFunction() {} // should be function myOtherFunction() {}
+          ]
         ])
       `
     );
@@ -724,7 +736,7 @@ describe('to satisfy assertion', function() {
         expected Map([ ['constructor', 123] ]) to satisfy Map([ ['foo', 456] ])
 
         Map([
-          ['constructor', 123],
+          ['constructor', 123]
           // missing ['foo', 456]
         ])
       `
