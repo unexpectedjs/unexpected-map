@@ -114,13 +114,15 @@ expect.output.preferredWidth = 80;
   });
 
   it('should output a diff on mistatching key in "to satisfy"', function() {
+    const arrayKey = [];
+
     expect(
       function() {
         expect(
-          new Map([[[], { foo: null }]]),
+          new Map([[arrayKey, { foo: null }]]),
           'to satisfy',
           new Map([
-            [[], { foo: null }],
+            [arrayKey, { foo: null }],
             ['bar', 'baz']
           ])
         );
