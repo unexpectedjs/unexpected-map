@@ -26,4 +26,30 @@ describe('to have values satiasying assertion', function() {
         '])'
     );
   });
+
+  it('should render a diff when the function differs', () => {
+    function myFunction() {}
+    function myOtherFunction() {}
+
+    expect(
+      () => {
+        expect(
+          new Map([['foo', myFunction]]),
+          'to have values satisfying',
+          myOtherFunction
+        );
+      },
+      'to throw an error satisfying',
+      'to equal snapshot',
+      expect.unindent`
+        expected Map to have values satisfying function myOtherFunction() {}
+
+        Map([
+          ['foo',
+            function myFunction() {} // should be function myOtherFunction() {}
+          ]
+        ])
+      `
+    );
+  });
 });
