@@ -1,5 +1,5 @@
 /* global expect */
-describe('empty assertion', () => {
+describe('to be empty assertion', () => {
   it('asserts a Map is empty', () => {
     expect(new Map(), 'to be empty');
   });

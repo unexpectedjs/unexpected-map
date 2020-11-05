@@ -1,5 +1,5 @@
 /* global expect */
-describe('size assertion', () => {
+describe('to have size assertion', () => {
   it('asserts a Map has a specific size', () => {
     expect(new Map([['foo', 'bar']]), 'to have size', 1);
   });
