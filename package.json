@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "coverage": "nyc --reporter lcov --reporter text mocha",
-    "lint": "eslint .",
+    "lint": "eslint . && prettier --check '**/*.js'",
     "test": "mocha"
   },
   "keywords": [
