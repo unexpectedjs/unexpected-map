@@ -5,16 +5,16 @@ const config = {
     'import/no-unresolved': ['error', { commonjs: true }],
     'mocha/no-exclusive-tests': 'error',
     'mocha/no-nested-tests': 'error',
-    'mocha/no-identical-title': 'error'
+    'mocha/no-identical-title': 'error',
   },
   overrides: [
     {
       files: ['test/**/*.js'],
       env: {
-        mocha: true
-      }
-    }
-  ]
+        mocha: true,
+      },
+    },
+  ],
 };
 
 module.exports = config;

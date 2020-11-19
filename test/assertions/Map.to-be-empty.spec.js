@@ -9,7 +9,7 @@ describe('to be empty assertion', () => {
       new Map([
         [1, 'foo'],
         [2, 'bar'],
-        [3, 'baz']
+        [3, 'baz'],
       ]),
       'not to be empty'
     );
@@ -22,7 +22,7 @@ describe('to be empty assertion', () => {
           new Map([
             [1, 'foo'],
             [2, 'bar'],
-            [3, 'baz']
+            [3, 'baz'],
           ]),
           'to be empty'
         );

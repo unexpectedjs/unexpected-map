@@ -1,22 +1,22 @@
 /* global expect */
-(typeof Map !== 'function' ? describe.skip : describe)('Map type', function() {
-  it('treats an empty Map as equal to Map', function() {
+(typeof Map !== 'function' ? describe.skip : describe)('Map type', function () {
+  it('treats an empty Map as equal to Map', function () {
     expect(new Map(), 'to equal', new Map());
   });
 
-  it('treats an matching Maps as equal', function() {
+  it('treats an matching Maps as equal', function () {
     expect(new Map([['foo', 'bar']]), 'to equal', new Map([['foo', 'bar']]));
   });
 
-  it('should mark missing Map keys', function() {
+  it('should mark missing Map keys', function () {
     expect(
-      function() {
+      function () {
         expect(
           new Map([['quux', 'bar']]),
           'to equal',
           new Map([
             ['quux', 'bar'],
-            ['zuuq', 'baz']
+            ['zuuq', 'baz'],
           ])
         );
       },
@@ -34,13 +34,13 @@
     );
   });
 
-  it('should mark unecessary Map keys', function() {
+  it('should mark unecessary Map keys', function () {
     expect(
-      function() {
+      function () {
         expect(
           new Map([
             ['quux', 'bar'],
-            ['zuuq', 'baz']
+            ['zuuq', 'baz'],
           ]),
           'to equal',
           new Map([['quux', 'bar']])
@@ -60,9 +60,9 @@
     );
   });
 
-  it('should output a value diff on matching Map', function() {
+  it('should output a value diff on matching Map', function () {
     expect(
-      function() {
+      function () {
         expect(
           new Map([['foo', 'bar']]),
           'to equal',
@@ -86,9 +86,9 @@
     );
   });
 
-  it('should output a diff for complex Map keys', function() {
+  it('should output a diff for complex Map keys', function () {
     expect(
-      function() {
+      function () {
         expect(
           new Map([[['a', 'b'], 'bar']]),
           'to equal',
@@ -108,8 +108,8 @@
     );
   });
 
-  it('should satisfy a Map', function() {
-    expect(function() {
+  it('should satisfy a Map', function () {
+    expect(function () {
       const key = [];
 
       expect(
@@ -120,17 +120,17 @@
     }, 'not to error');
   });
 
-  it('should output a diff on mistatching key in "to satisfy"', function() {
+  it('should output a diff on mistatching key in "to satisfy"', function () {
     const arrayKey = [];
 
     expect(
-      function() {
+      function () {
         expect(
           new Map([[arrayKey, { foo: null }]]),
           'to satisfy',
           new Map([
             [arrayKey, { foo: null }],
-            ['bar', 'baz']
+            ['bar', 'baz'],
           ])
         );
       },
@@ -148,9 +148,9 @@
     );
   });
 
-  it('should output a diff when failing "to satisfy"', function() {
+  it('should output a diff when failing "to satisfy"', function () {
     expect(
-      function() {
+      function () {
         expect(
           new Map([['foo', { foo: null }]]),
           'to satisfy',

@@ -1,13 +1,13 @@
 /* global expect */
-describe('to have values satisfying assertion', function() {
-  it('should pass with an assertion', function() {
-    expect(function() {
+describe('to have values satisfying assertion', function () {
+  it('should pass with an assertion', function () {
+    expect(function () {
       expect(new Map([[[], null]]), 'to have values satisfying', 'to be null');
     }, 'not to error');
   });
 
-  it('should pass with an expect.it', function() {
-    expect(function() {
+  it('should pass with an expect.it', function () {
+    expect(function () {
       expect(
         new Map([[[], null]]),
         'to have values satisfying',
@@ -16,21 +16,21 @@ describe('to have values satisfying assertion', function() {
     }, 'not to error');
   });
 
-  it('should pass with an object value and satisfy semantics', function() {
-    expect(function() {
+  it('should pass with an object value and satisfy semantics', function () {
+    expect(function () {
       expect(new Map([[[], { foo: null }]]), 'to have values satisfying', {
-        foo: expect.it('to be falsy')
+        foo: expect.it('to be falsy'),
       });
     }, 'not to error');
   });
 
   it('fails if the given Map is empty', () => {
     expect(
-      function() {
+      function () {
         expect(
           new Map(),
           'to have values satisfying',
-          expect.it(value => {
+          expect.it((value) => {
             expect(value, 'to equal', '0');
           })
         );
@@ -47,11 +47,11 @@ describe('to have values satisfying assertion', function() {
     );
   });
 
-  it('should render a diff when failing "to have values satisfying"', function() {
+  it('should render a diff when failing "to have values satisfying"', function () {
     expect(
-      function() {
+      function () {
         expect(new Map([[[], { foo: null }]]), 'to have values satisfying', {
-          foo: expect.it('to be a number')
+          foo: expect.it('to be a number'),
         });
       },
       'to throw an error satisfying',
