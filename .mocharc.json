@@ -1,0 +1,7 @@
+{
+  "reporter": "spec",
+  "recursive": true,
+  "timeout": 20000,
+  "require": "./test/common/node",
+  "exclude": "./test/common"
+}
