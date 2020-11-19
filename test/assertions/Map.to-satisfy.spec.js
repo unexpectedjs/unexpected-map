@@ -15,7 +15,7 @@ expect.addAssertion('<any> when delayed a little bit <assertion>', function(
 
 describe('to satisfy assertion', function() {
   it('passes when an object is tested against itself, even in the presence of circular references', function() {
-    var circular = {};
+    const circular = {};
     circular.loop = circular;
     expect(circular, 'to satisfy', circular);
   });
@@ -79,7 +79,7 @@ describe('to satisfy assertion', function() {
         Object.defineProperty(this, 'b', { enumerable: false, value: b });
       }
 
-      var clonedExpect = expect.clone().addType({
+      const clonedExpect = expect.clone().addType({
         name: 'MyThing',
         base: 'object',
         identify: function(obj) {
@@ -295,7 +295,7 @@ describe('to satisfy assertion', function() {
     });
 
     it('should only consider functions that are identified as functions by the type system', function() {
-      var clonedExpect = expect.clone().addType({
+      const clonedExpect = expect.clone().addType({
         name: 'functionStartingWithF',
         identify: function(obj) {
           return typeof obj === 'function' && /^f/i.test(obj.name);
@@ -502,7 +502,7 @@ describe('to satisfy assertion', function() {
   });
 
   it.skip('indents removed objects correctly', function() {
-    var str = 'abcdefghijklmnopqrstuvwxyz';
+    const str = 'abcdefghijklmnopqrstuvwxyz';
     expect(
       function() {
         expect(
@@ -537,7 +537,7 @@ describe('to satisfy assertion', function() {
   });
 
   it.skip('indents unchanged objects correctly', function() {
-    var str = 'abcdefghijklmnopqrstuvwxyz';
+    const str = 'abcdefghijklmnopqrstuvwxyz';
     expect(
       function() {
         expect(
