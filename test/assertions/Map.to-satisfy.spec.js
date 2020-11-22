@@ -1,17 +1,17 @@
 /* global expect */
-expect.addAssertion('<any> when delayed a little bit <assertion>', function (
-  expect,
-  subject
-) {
-  return expect.promise(function (run) {
-    setTimeout(
-      run(function () {
-        return expect.shift();
-      }),
-      1
-    );
-  });
-});
+expect.addAssertion(
+  '<any> when delayed a little bit <assertion>',
+  function (expect, subject) {
+    return expect.promise(function (run) {
+      setTimeout(
+        run(function () {
+          return expect.shift();
+        }),
+        1
+      );
+    });
+  }
+);
 
 describe('to satisfy assertion', function () {
   it('passes when an object is tested against itself, even in the presence of circular references', function () {
