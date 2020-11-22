@@ -1,2 +1,8 @@
 /.nyc_output
 /coverage
+
+# Don't fight npm i --save
+/package.json
+
+# Generated
+/CHANGELOG.md
