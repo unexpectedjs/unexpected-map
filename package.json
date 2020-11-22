@@ -41,6 +41,6 @@
     "nyc": "^15.0.0",
     "prettier": "~2.1.2",
     "unexpected": "^12.0.0",
-    "unexpected-snapshot": "^0.7.1"
+    "unexpected-snapshot": "^1.1.0"
   }
 }
