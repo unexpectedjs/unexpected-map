@@ -39,7 +39,7 @@ describe('to have values satisfying assertion', function () {
       'to equal snapshot',
       expect.unindent`
         expected Map([]) to have values satisfying
-        expect.it(value => {
+        expect.it((value) => {
           expect(value, 'to equal', '0');
         })
           expected Map([]) not to be empty
