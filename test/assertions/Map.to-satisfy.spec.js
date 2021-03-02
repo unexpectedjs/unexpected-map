@@ -66,7 +66,7 @@ describe('to satisfy assertion', function () {
         },
         'to throw an error satisfying',
         'to equal snapshot',
-        "expected Map([ ['foo', 123] ]) not to satisfy Map([ ['foo', 123] ])"
+        "expected new Map[ ['foo', 123] ]) not to satisfy new Map[ ['foo', 123] ])"
       );
     });
   });
@@ -124,9 +124,10 @@ describe('to satisfy assertion', function () {
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([ ['bar', 123] ]) to satisfy Map([ ['foo', undefined], ['bar', 456] ])
+        expected new Map[ ['bar', 123] ])
+        to satisfy new Map[ ['foo', undefined], ['bar', 456] ])
 
-        Map([
+        new Map[
           ['bar',
             123 // should equal 456
           ]
@@ -150,10 +151,10 @@ describe('to satisfy assertion', function () {
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([ ['foo', 'bar'] ])
-        to satisfy Map([ ['foo', 'bar'], ['baz', expect.it('to equal', 123)] ])
+        expected new Map[ ['foo', 'bar'] ])
+        to satisfy new Map[ ['foo', 'bar'], ['baz', expect.it('to equal', 123)] ])
 
-        Map([
+        new Map[
           ['foo', 'bar']
           // missing: ['baz', should equal 123]
         ])
@@ -239,9 +240,9 @@ describe('to satisfy assertion', function () {
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([ ['foo', 'foo'] ]) to satisfy Map([ ['foo', /f00/] ])
+        expected new Map[ ['foo', 'foo'] ]) to satisfy new Map[ ['foo', /f00/] ])
 
-        Map([
+        new Map[
           ['foo',
             'foo' // should match /f00/
           ]
@@ -260,10 +261,10 @@ describe('to satisfy assertion', function () {
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([ ['foo', 'foo'] ])
-        to satisfy Map([ ['foo', expect.it('not to match', /oo/)] ])
+        expected new Map[ ['foo', 'foo'] ])
+        to satisfy new Map[ ['foo', expect.it('not to match', /oo/)] ])
 
-        Map([
+        new Map[
           ['foo',
             'foo' // should not match /oo/
                   //
@@ -337,13 +338,13 @@ describe('to satisfy assertion', function () {
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([ ['foo', 123] ]) to satisfy
-        Map([
+        expected new Map[ ['foo', 123] ]) to satisfy
+        new Map[
           ['foo', expect.it('to be a number')
                   .and('to be greater than', 200)]
         ])
 
-        Map([
+        new Map[
           ['foo',
             123 // ✓ should be a number and
                 // ⨯ should be greater than 200
@@ -423,10 +424,10 @@ describe('to satisfy assertion', function () {
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([ ['bool', 'true'] ])
-        to satisfy Map([ ['bool', expect.it('to be true')] ])
+        expected new Map[ ['bool', 'true'] ])
+        to satisfy new Map[ ['bool', expect.it('to be true')] ])
 
-        Map([
+        new Map[
           ['bool',
             'true' // expected 'true' to be true
                    //   The assertion does not have a matching signature for:
@@ -625,9 +626,10 @@ describe('to satisfy assertion', function () {
           'to throw an error satisfying',
           'to equal snapshot',
           expect.unindent`
-            expected Map([ ['foo', true], ['bar', false] ]) to exhaustively satisfy Map([])
+            expected new Map[ ['foo', true], ['bar', false] ])
+            to exhaustively satisfy new Map[])
 
-            Map([
+            new Map[
               // should be removed: ['foo', true]
               // should be removed: ['bar', false]
             ])
@@ -650,9 +652,9 @@ describe('to satisfy assertion', function () {
         'to throw an error satisfying',
         'to equal snapshot',
         expect.unindent`
-          expected Map([]) to satisfy Map([ ['foo', expect.it('to be a string')] ])
+          expected new Map[]) to satisfy new Map[ ['foo', expect.it('to be a string')] ])
 
-          Map([
+          new Map[
             // missing: ['foo', should be a string]
           ])
         `
@@ -681,9 +683,9 @@ describe('to satisfy assertion', function () {
         'to throw an error satisfying',
         'to equal snapshot',
         expect.unindent`
-          expected Map([]) to satisfy Map([ ['foo', expect.it('to be a string')] ])
+          expected new Map[]) to satisfy new Map[ ['foo', expect.it('to be a string')] ])
 
-          Map([
+          new Map[
             // missing: ['foo', should be a string]
           ])
         `
@@ -719,13 +721,13 @@ describe('to satisfy assertion', function () {
             .replace(/function foo/g, 'function '),
           'to equal snapshot',
           expect.unindent`
-            expected Map([]) to satisfy
-            Map([
+            expected new Map[]) to satisfy
+            new Map[
               ['bar', 123],
               ['foo', expect.it(function (v) { expect(v, 'to be undefined'); })]
             ])
 
-            Map([
+            new Map[
               // missing ['bar', 123]
               // missing ['foo', should satisfy expect.it(function (v) { expect(v, 'to be undefined'); })]
             ])
@@ -750,10 +752,10 @@ describe('to satisfy assertion', function () {
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([ ['foo', function myFunction() {}] ])
-        to satisfy Map([ ['foo', function myOtherFunction() {}] ])
+        expected new Map[ ['foo', function myFunction() {}] ])
+        to satisfy new Map[ ['foo', function myOtherFunction() {}] ])
 
-        Map([
+        new Map[
           ['foo',
             function myFunction() {} // should be function myOtherFunction() {}
           ]
@@ -774,9 +776,9 @@ describe('to satisfy assertion', function () {
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([ ['constructor', 123] ]) to satisfy Map([ ['foo', 456] ])
+        expected new Map[ ['constructor', 123] ]) to satisfy new Map[ ['foo', 456] ])
 
-        Map([
+        new Map[
           ['constructor', 123]
           // missing ['foo', 456]
         ])

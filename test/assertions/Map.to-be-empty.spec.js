@@ -29,7 +29,7 @@ describe('to be empty assertion', () => {
       },
       'to throw an error satisfying',
       'to equal snapshot',
-      "expected Map([ [1, 'foo'], [2, 'bar'], [3, 'baz'] ]) to be empty"
+      "expected new Map[ [1, 'foo'], [2, 'bar'], [3, 'baz'] ]) to be empty"
     );
   });
 
@@ -40,7 +40,7 @@ describe('to be empty assertion', () => {
       },
       'to throw an error satisfying',
       'to equal snapshot',
-      'expected Map([]) not to be empty'
+      'expected new Map[]) not to be empty'
     );
   });
 });

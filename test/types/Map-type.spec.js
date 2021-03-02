@@ -23,10 +23,10 @@
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([ ['quux', 'bar'] ])
-        to equal Map([ ['quux', 'bar'], ['zuuq', 'baz'] ])
+        expected new Map[ ['quux', 'bar'] ])
+        to equal new Map[ ['quux', 'bar'], ['zuuq', 'baz'] ])
 
-        Map([
+        new Map[
           ['quux', 'bar']
           // missing ['zuuq', 'baz']
         ])
@@ -49,10 +49,10 @@
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([ ['quux', 'bar'], ['zuuq', 'baz'] ])
-        to equal Map([ ['quux', 'bar'] ])
+        expected new Map[ ['quux', 'bar'], ['zuuq', 'baz'] ])
+        to equal new Map[ ['quux', 'bar'] ])
 
-        Map([
+        new Map[
           ['quux', 'bar'],
           ['zuuq', 'baz'] // should be removed
         ])
@@ -72,9 +72,9 @@
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([ ['foo', 'bar'] ]) to equal Map([ ['foo', 'baz'] ])
+        expected new Map[ ['foo', 'bar'] ]) to equal new Map[ ['foo', 'baz'] ])
 
-        Map([
+        new Map[
           ['foo', 
             'bar' // should equal 'baz'
                   //
@@ -98,9 +98,10 @@
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([ [[ 'a', 'b' ], 'bar'] ]) to equal Map([ [[ 'a', 'c' ], 'bar'] ])
+        expected new Map[ [[ 'a', 'b' ], 'bar'] ])
+        to equal new Map[ [[ 'a', 'c' ], 'bar'] ])
 
-        Map([
+        new Map[
           [[ 'a', 'b' ], 'bar'] // should be removed
           // missing [[ 'a', 'c' ], 'bar']
         ])
@@ -137,10 +138,10 @@
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([ [[], { foo: null }] ])
-        to satisfy Map([ [[], { foo: null }], ['bar', 'baz'] ])
+        expected new Map[ [[], { foo: null }] ])
+        to satisfy new Map[ [[], { foo: null }], ['bar', 'baz'] ])
 
-        Map([
+        new Map[
           [[], { foo: null }]
           // missing ['bar', 'baz']
         ])
@@ -160,9 +161,10 @@
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([ ['foo', { foo: null }] ]) to satisfy Map([ ['bar', { foo: null }] ])
+        expected new Map[ ['foo', { foo: null }] ])
+        to satisfy new Map[ ['bar', { foo: null }] ])
 
-        Map([
+        new Map[
           ['foo', { foo: null }]
           // missing ['bar', { foo: null }]
         ])
@@ -179,7 +181,7 @@
         'to throw an error satisfying',
         'to equal snapshot',
         expect.unindent`
-          expected Map([]) to equal {}
+          expected new Map[]) to equal {}
 
           Mismatching constructors Map should be Object
         `
@@ -194,7 +196,7 @@
         'to throw an error satisfying',
         'to equal snapshot',
         expect.unindent`
-          expected Map([]) to equal {}
+          expected new Map[]) to equal {}
 
           Mismatching constructors Map should be Object
         `

@@ -15,7 +15,7 @@ describe('to have size assertion', () => {
       },
       'to throw an error satisfying',
       'to equal snapshot',
-      "expected Map([ ['foo', 'bar'] ]) to have size 2"
+      "expected new Map[ ['foo', 'bar'] ]) to have size 2"
     );
   });
 
@@ -26,7 +26,7 @@ describe('to have size assertion', () => {
       },
       'to throw an error satisfying',
       'to equal snapshot',
-      "expected Map([ ['foo', 'bar'] ]) not to have size 1"
+      "expected new Map[ ['foo', 'bar'] ]) not to have size 1"
     );
   });
 });

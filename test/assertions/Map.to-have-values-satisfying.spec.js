@@ -38,11 +38,11 @@ describe('to have values satisfying assertion', function () {
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([]) to have values satisfying
+        expected new Map[]) to have values satisfying
         expect.it((value) => {
           expect(value, 'to equal', '0');
         })
-          expected Map([]) not to be empty
+          expected new Map[]) not to be empty
       `
     );
   });
@@ -57,10 +57,10 @@ describe('to have values satisfying assertion', function () {
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([ [[], { foo: null }] ])
+        expected new Map[ [[], { foo: null }] ])
         to have values satisfying { foo: expect.it('to be a number') }
 
-        Map([
+        new Map[
           [[], {
             foo: null // should be a number
           }]
@@ -86,7 +86,7 @@ describe('to have values satisfying assertion', function () {
       expect.unindent`
         expected Map to have values satisfying function myOtherFunction() {}
 
-        Map([
+        new Map[
           ['foo',
             function myFunction() {} // should be function myOtherFunction() {}
           ]

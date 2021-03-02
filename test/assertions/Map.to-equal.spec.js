@@ -14,9 +14,9 @@ describe('to equal assertion', function () {
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([ [{}, 123] ]) to equal Map([ [{}, 123] ])
+        expected new Map[ [{}, 123] ]) to equal new Map[ [{}, 123] ])
 
-        Map([
+        new Map[
           [{}, 123] // should be removed
           // missing [{}, 123]
         ])
@@ -32,9 +32,9 @@ describe('to equal assertion', function () {
       'to throw an error satisfying',
       'to equal snapshot',
       expect.unindent`
-        expected Map([ [123, {}] ]) to equal Map([ [123, {}] ])
+        expected new Map[ [123, {}] ]) to equal new Map[ [123, {}] ])
 
-        Map([
+        new Map[
           [123, {
 
           }]
