@@ -1,3 +1,12 @@
+### v3.1.0 (2021-03-02)
+
+- [Add new keyword to inspection so it outputs valid code.](https://github.com/unexpectedjs/unexpected-map/commit/18efc34d87495c21d1cb224977ef04e088b30182) ([Alex J Burke](mailto:alex@alexjeffburke.com))
+- [Switch to GitHub Actions](https://github.com/unexpectedjs/unexpected-map/commit/2eaf73e3aaff85c592936f22742223b071767122) ([Alex J Burke](mailto:alex@alexjeffburke.com))
+- [Add CHANGELOG.md + offline-github-changelog integration](https://github.com/unexpectedjs/unexpected-map/commit/2f4aa486e2d065b9f2b52383618ca500ebc11024) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [prettier --write '\*\*\/\*.{js,json,md}'](https://github.com/unexpectedjs/unexpected-map/commit/c1a0faa40f179cd335ca5511964fc10757c55603) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [Also check \*.json and \*.md with prettier](https://github.com/unexpectedjs/unexpected-map/commit/c4e24c374764e2ba45359d35f56a291ca973f953) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
+- [+3 more](https://github.com/unexpectedjs/unexpected-map/compare/v3.0.0...v3.1.0)
+
 ### v3.0.0 (2020-11-19)
 
 - [prettier --write '\*\*\/\*.js'](https://github.com/unexpectedjs/unexpected-map/commit/0033de72f398e801ea2f6004bb17e6c3a1660f5f) ([Andreas Lind](mailto:andreaslindpetersen@gmail.com))
