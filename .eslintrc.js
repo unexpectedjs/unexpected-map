@@ -1,5 +1,5 @@
 const config = {
-  extends: ['standard', 'prettier', 'prettier/standard'],
+  extends: ['standard', 'prettier'],
   plugins: ['import', 'mocha'],
   rules: {
     'import/no-unresolved': ['error', { commonjs: true }],
