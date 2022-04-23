@@ -37,7 +37,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "mocha": "^9.1.3",
     "nyc": "^15.0.0",
-    "offline-github-changelog": "^1.7.0",
+    "offline-github-changelog": "^2.4.0",
     "prettier": "~2.5.1",
     "unexpected": "^12.0.0",
     "unexpected-snapshot": "^1.1.0"
