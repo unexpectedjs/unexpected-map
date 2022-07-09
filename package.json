@@ -10,7 +10,7 @@
     "coverage": "nyc --reporter lcov --reporter text mocha",
     "lint": "eslint . && prettier --check '**/*.{js,json,md}'",
     "test": "mocha",
-    "preversion": "offline-github-changelog --next=${npm_package_version} > CHANGELOG.md && git add CHANGELOG.md"
+    "preversion": "offline-github-changelog --next=${npm_new_version} > CHANGELOG.md && git add CHANGELOG.md"
   },
   "keywords": [
     "test",
